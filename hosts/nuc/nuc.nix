@@ -22,14 +22,11 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  boot.loader.grub.configurationLimit = 10;
+  boot.loader.grub.useOSProber = true;
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
-  # Limit the number of generations to keep
-#   boot.loader.systemd-boot.configurationLimit = 10;
-  boot.loader.grub.configurationLimit = 10;
 
   networking.hostName = "nucnix"; # Define your hostname.
   # Pick only one of the below networking options.
