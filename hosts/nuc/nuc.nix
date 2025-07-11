@@ -15,7 +15,9 @@
 
   #host specific settings for users:
   home-manager.users.tv = {
+    programs.zsh.enable = true; # still need to enable for options to apply, even if nixos config has it defined already
     programs.zsh.shellAliases = {
+      nixtttt = "sudo nixos-rebuild switch";
       latr = "${pkgs.coreutils}/bin/ls -latr";
     };
   };
