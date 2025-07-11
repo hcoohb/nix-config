@@ -27,7 +27,6 @@
     git
     wget
     oh-my-zsh
-    cowsay
     which
     zip
     unzip

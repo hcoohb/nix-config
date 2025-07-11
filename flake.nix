@@ -15,23 +15,15 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  {
     nixosConfigurations =
     {
-    nucnix = let
-      username = "hcooh";
-      specialArgs = {inherit username;};
-    in
+    nucnix =
       nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        # Import the previous configuration.nix we used,
-        # so the old configuration file still takes effect
-#         ./configuration.nix
-        ./hosts/nuc
-
-        # creating user
-        ./users/${username}/nixos.nix
+        ./hosts/nuc/nuc.nix
 
 
         # make home-manager as a module of nixos
@@ -40,11 +32,6 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
-          home-manager.extraSpecialArgs = specialArgs;
-
-          # configuring user
-          home-manager.users.${username} = import ./users/${username}/home.nix;
 
         }
       ];

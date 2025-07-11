@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../common.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -30,6 +29,23 @@
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
 
+  # Perform garbage collection weekly to maintain low disk usage
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
+
+  # Optimize storage
+  # You can also manually optimize the store via:
+  #    nix-store --optimise
+  # Refer to the following link for more details:
+  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
+  nix.settings.auto-optimise-store = true;
+
+  # Enable the Flakes feature and the accompanying new nix command-line tool
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -46,7 +62,7 @@
   # services.xserver.enable = true;
 
 
-
+  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -68,6 +84,39 @@
 
 
   # programs.firefox.enable = true;
+
+  # List packages installed in system profile.
+  # You can use https://search.nixos.org/ to find more packages (and options).
+  environment.systemPackages = with pkgs; [
+  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    git
+    wget
+    oh-my-zsh
+    cowsay
+    which
+    zip
+    unzip
+    xz
+    p7zip
+
+  ];
+
+
+  programs.zsh = {
+    enable = true;
+    ohMyZsh.enable = true;
+    ohMyZsh.theme = "af-magic";
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ll = "ls -l";
+      nixupdate = "sudo nixos-rebuild switch";
+      nixedit = "sudo nano /etc/nixos/configuration.nix";
+    };
+    histSize = 5000;
+  };
+  users.defaultUserShell = pkgs.zsh;  # set as default shell
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
