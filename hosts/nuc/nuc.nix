@@ -8,9 +8,17 @@
   imports =
     [
       ../../users/hcooh.nix # add each users
+      ../../users/tv.nix # add each users
       ./hardware-configuration.nix # Include the results of the hardware scan.
       ../common.nix # common nixos to all hosts
     ];
+
+  #host specific settings for users:
+  home-manager.users.tv = {
+    programs.zsh.shellAliases = {
+      latr = "${pkgs.coreutils}/bin/ls -latr";
+    };
+  };
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
