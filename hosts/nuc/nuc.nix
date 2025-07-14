@@ -11,7 +11,10 @@
       ../../users/tv.nix # add each users
       ./hardware-configuration.nix # Include the results of the hardware scan.
       ../common.nix # common nixos to all hosts
+      ../../modules/lxqt.nix
+#       ../../modules/i3.nix
     ];
+
 
   #host specific settings for users:
   home-manager.users.tv = {
@@ -20,7 +23,13 @@
       nixtttt = "sudo nixos-rebuild switch";
       latr = "${pkgs.coreutils}/bin/ls -latr";
     };
+#     xsession.windowManager.i3.enable = true;
   };
+
+
+  # enable autologin for user:
+#   services.displayManager.autoLogin.enable = true;
+#   services.displayManager.autoLogin.user = "tv";
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
