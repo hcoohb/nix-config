@@ -38,7 +38,7 @@
     nucnix =
       nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = shared-modules ++ [ ./hosts/nuc/nuc.nix ];
+      modules = shared-modules ++ [ ./hosts/nuc/nuc.nix  disko.nixosModules.disko];
     };
 
     asus360 = nixpkgs.lib.nixosSystem {
