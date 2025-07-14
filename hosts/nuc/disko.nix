@@ -1,7 +1,6 @@
 {disko, ...}: {
-    imports = [
-        disko.nixosModules.disko 
-        {
+    imports = [ disko.nixosModules.disko ];
+
         disko.devices = {
           disk = {
             main = {
@@ -39,6 +38,4 @@
             };
           };
         };
-      }
-    ];
 }
