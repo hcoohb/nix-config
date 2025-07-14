@@ -13,7 +13,7 @@
       ../common.nix # common nixos to all hosts
       ../../modules/lxqt.nix
 #       ../../modules/i3.nix
-    #  ./disko.nix
+      ./disko.nix
     ];
 
 
