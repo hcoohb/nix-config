@@ -2,8 +2,7 @@
     imports = [ disko.nixosModules.disko ];
 
         disko.devices = {
-          disk = {
-            main = {
+          disk.main = {
               # When using disko-install, we will overwrite this value from the commandline
               device = "/dev/sda";
               type = "disk";
@@ -17,7 +16,7 @@
                   };
                   ESP = {
                     type = "EF00";
-                    size = "500M";
+                    size = "200M";
                     content = {
                       type = "filesystem";
                       format = "vfat";
@@ -36,6 +35,5 @@
                 };
               };
             };
-          };
         };
 }
