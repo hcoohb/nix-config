@@ -31,6 +31,7 @@
         home-manager.useUserPackages = true;
       }
     ];
+    shared-specialArgs = { inherit disko; };
   in
   {
     nixosConfigurations =
@@ -38,7 +39,8 @@
     nucnix =
       nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = shared-modules ++ [ ./hosts/nuc/nuc.nix  disko.nixosModules.disko];
+      modules = shared-modules ++ [ ./hosts/nuc/nuc.nix ];
+      specialArgs = shared-specialArgs;
     };
 
     asus360 = nixpkgs.lib.nixosSystem {
