@@ -29,16 +29,16 @@
 
 
   # enable autologin for user:
-#   services.displayManager.autoLogin.enable = true;
-#   services.displayManager.autoLogin.user = "tv";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "tv";
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   boot.loader.grub.configurationLimit = 10;
   boot.loader.grub.useOSProber = true;
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
 
   networking.hostName = "nucnix"; # Define your hostname.
   # Pick only one of the below networking options.

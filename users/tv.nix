@@ -31,6 +31,15 @@ in
     ];
 
 
+    xdg.configFile."pcmanfm-qt/lxqt/settings.conf".text = ''
+      [Desktop]
+      BgColor=#0d397f
+      font=monospace
+    '';
+
+
+
+
 
     # This value determines the home Manager release that your
     # configuration is compatible with. This helps avoid breakage
