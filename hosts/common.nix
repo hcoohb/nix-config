@@ -11,7 +11,7 @@
 
   nix.nixPath = [
     "nixpkgs=${pkgs.path}"
-    "/home/hcooh/nixos-config"
+    "nixos-config=/home/hcooh/nixos-config"
   ];
 
 
