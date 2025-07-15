@@ -33,7 +33,7 @@ in
 
     xdg.configFile."pcmanfm-qt/lxqt/settings.conf".text = ''
       [Desktop]
-      BgColor=#0d397f
+      BgColor=#88397f
       font=monospace
     '';
 
