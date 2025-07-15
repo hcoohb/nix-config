@@ -7,6 +7,14 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Add a path to the nixpath for config search
+
+  nix.nixPath = [
+    "nixpkgs=${pkgs.path}"
+    "/home/hcooh/nixos-config"
+  ];
+
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
