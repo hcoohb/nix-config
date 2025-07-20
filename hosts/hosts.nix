@@ -28,7 +28,7 @@
     unzip
     xz
     p7zip
-
+    nix-tree
 
     # Fonts
     powerline-fonts

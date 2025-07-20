@@ -8,16 +8,13 @@
   imports =
     [
       ../../users/hcooh/hcooh.nix # add each users
-      ../../users/tv/tv.nix # add each users
       ./hardware-configuration.nix # Include the results of the hardware scan.
       ../hosts.nix # common nixos to all hosts
-      ../../modules/lxqt.nix
-#       ../../modules/i3.nix
       ./disko.nix
     ];
 
     environment.systemPackages = with pkgs; [
-      featherpad
+
   ];
 
   #host specific settings for users:
@@ -27,13 +24,8 @@
       nixtttt = "sudo nixos-rebuild switch";
       latr = "${pkgs.coreutils}/bin/ls -latr";
     };
-#     xsession.windowManager.i3.enable = true;
   };
 
-
-  # enable autologin for user:
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "tv";
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -43,7 +35,7 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.efiInstallAsRemovable = true;
 
-  networking.hostName = "nucnix"; # Define your hostname.
+  networking.hostName = "cloudnix"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -101,8 +93,12 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-  services.sshd.enable = true;
+  services.openssh.enable = true;
+  services.openssh.settings.PermitRootLogin = "no";
+  services.openssh.extraConfig = ''
+    LoginGracetime 2m"
+    MaxAuthTries 4
+    '';
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

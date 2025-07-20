@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  username = "hcooh";
+  username = "tv";
 in
 {
 
@@ -14,7 +14,10 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    uid = 1001;
+    group = "users";
+    initialPassword = "abc123";
+    extraGroups = [ "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
   ##################################################################################################################
@@ -26,21 +29,20 @@ in
   home-manager.users.${username} = {
 
     imports = [
-      ../home/common.nix
+      ../../home/home.nix
     ];
 
 
-    # Packages that should be installed to the user profile.
-    home.packages = with pkgs; [
-      tree
-    ];
-
-    # basic configuration of git
-    programs.git = {
-      enable = true;
-      userName = "hcoohb";
-      userEmail = "hcoohb@gmail.com";
+    xdg.configFile."pcmanfm-qt/lxqt/settings.conf".text = ''
+      [Desktop]
+      BgColor=#88397f
+      font=monospace
+    '';
+    xdg.configFile = {
+#         "openbox/menu.xml".source = ./menu.xml;
+        "openbox/rc.xml".source = ./rc.xml;
     };
+
 
 
     # This value determines the home Manager release that your

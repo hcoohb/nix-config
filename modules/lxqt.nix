@@ -5,4 +5,5 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.lxqt.enable = true;
 
+  environment.lxqt.excludePackages = [ pkgs.xscreensaver ];
 }
