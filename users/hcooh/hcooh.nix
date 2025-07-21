@@ -46,6 +46,11 @@ in
     };
 
 
+#     home.file = {
+#       test5.text = "${config.sops.secrets.new_val.key}";
+#       test6.text = "${config.sops.secrets.hello.key}";
+#     };
+
     # This value determines the home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new home Manager release introduces backwards
@@ -56,6 +61,20 @@ in
     # changes in each release.
     home.stateVersion = "25.05";
   };
+
+
+   ##### SECRETS
+    sops.secrets = {
+      new_val={
+        owner = config.users.users.${username}.name;
+        inherit (config.users.users.${username}) group;
+      };
+      hello={
+        owner = config.users.users.${username}.name;
+        inherit (config.users.users.${username}) group;
+      };
+    };
+
 
 
 

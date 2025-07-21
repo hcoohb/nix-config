@@ -18,6 +18,16 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # Add the private repo that contains all secrets:
+    mysecrets = {
+      url = "github:hcoohb/nix-secrets";
+#       url = "git+ssh://git@github.com/hcoohb/nix-secrets.git?ref=main&shallow=1";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, disko, ... }@inputs:
@@ -31,7 +41,7 @@
         home-manager.useUserPackages = true;
       }
     ];
-    shared-specialArgs = { inherit disko; };
+    shared-specialArgs = { inherit inputs disko; };
   in
   {
     nixosConfigurations =

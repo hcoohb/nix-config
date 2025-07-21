@@ -14,6 +14,7 @@
       ../../modules/lxqt.nix
 #       ../../modules/i3.nix
       ./disko.nix
+      ../../modules/tailscale.nix
     ];
 
     environment.systemPackages = with pkgs; [

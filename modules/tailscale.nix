@@ -28,9 +28,10 @@ systemd.services.tailscale-autoconnect = {
     fi
 
     # otherwise authenticate with tailscale
-    ${tailscale}/bin/tailscale up -authkey tskey-examplekeyhere
+    ${tailscale}/bin/tailscale up -authkey $(cat ${config.sops.secrets.nucnix_tailscale_auth_key.path})
   '';
   #replace tskey-examplekeyhere with the key you got from the Admin panel.
 };
+sops.secrets.nucnix_tailscale_auth_key={};
 
 }
