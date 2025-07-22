@@ -17,6 +17,7 @@ in
     uid = 1000;
     group = "users";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    hashedPasswordFile = config.sops.secrets.hcooh_pwd.path;
   };
 
   ##################################################################################################################
@@ -65,6 +66,7 @@ in
 
    ##### SECRETS
     sops.secrets = {
+      hcooh_pwd.neededForUsers = true;
       new_val={
         owner = config.users.users.${username}.name;
         inherit (config.users.users.${username}) group;

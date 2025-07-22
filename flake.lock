@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751810233,
-        "narHash": "sha256-kllkNbIqQi3VplgTMeGzuh1t8Gk8TauvkTRt93Km+tQ=",
+        "lastModified": 1753055804,
+        "narHash": "sha256-KerePGJYX47ex6OY3CWsid4AltO2gDtQROunYJ0eCEE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9b0873b46c9f9e4b7aa01eb634952c206af53068",
+        "rev": "adf195f021a8cbb0c317f75b52e96c82616526f9",
         "type": "github"
       },
       "original": {
@@ -45,26 +45,28 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1753067854,
-        "narHash": "sha256-OpiPLDSJFGKk4XB1lyydzn4hbjHs9mDjKtgq3ynkuD8=",
-        "owner": "hcoohb",
-        "repo": "nix-secrets",
-        "rev": "ccf9cd69b6c272fd634a5bdd54a52a9a4f881109",
-        "type": "github"
+        "lastModified": 1753168607,
+        "narHash": "sha256-4gb6nSTA8PPxWjqlMEwiYgFvx9H2ZysvuD4Q882B4VA=",
+        "ref": "main",
+        "rev": "072049059bc55daa01e66c325864892907b0e2c0",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/hcoohb/nix-secrets.git"
       },
       "original": {
-        "owner": "hcoohb",
-        "repo": "nix-secrets",
-        "type": "github"
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/hcoohb/nix-secrets.git"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1751943650,
-        "narHash": "sha256-7orTnNqkGGru8Je6Un6mq1T8YVVU/O5kyW4+f9C1mZQ=",
+        "lastModified": 1752866191,
+        "narHash": "sha256-NV4S2Lf2hYmZQ3Qf4t/YyyBaJNuxLPyjzvDma0zPp/M=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "88983d4b665fb491861005137ce2b11a9f89f203",
+        "rev": "f01fe91b0108a7aff99c99f2e9abbc45db0adc2a",
         "type": "github"
       },
       "original": {
