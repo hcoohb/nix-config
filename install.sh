@@ -31,11 +31,12 @@ ssh-keygen -q -N "" -t ed25519 -f "$temp/etc/ssh/ssh_host_ed25519_key"
 sudo chmod 600 "$temp/etc/ssh/ssh_host_ed25519_key"
 
 #create an age key from the public host key:
-agekey=$(nix-shell -p ssh-to-age --run 'cat "$temp/etc/ssh/ssh_host_ed25519_key.pub" | ssh-to-age')
+agekey=$(nix-shell -p ssh-to-age --run "cat $temp/etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age")
 echo "#####################################"
 echo "On current system, edit the github:hcoohb/nix-secrets/.sops.yaml and add the following agekey"
 echo "$agekey"
-echo "then 'nix flake update mysecrets' and commit"
+echo "then 'sops updatekeys secrets.yaml' and commit and push"
+echo "then 'nix flake update mysecrets' to refresh the lock file"
 echo "#####################################"
 read -n 1 -s -r -p "Press any key to continue..."
 # Install NixOS to the host system with our secrets
