@@ -88,9 +88,10 @@
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "no";
   services.openssh.extraConfig = ''
-    LoginGracetime 2m"
+    LoginGracetime 2m
     MaxAuthTries 4
     '';
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

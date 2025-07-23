@@ -18,6 +18,10 @@ in
     group = "users";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     hashedPasswordFile = config.sops.secrets.hcooh_pwd.path;
+    openssh.authorizedKeys.keys =
+    [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqVUomUD2uyYMGFa45vDTQCqe8v1Qm+39az7mseVSja"
+    ];
   };
 
   ##################################################################################################################
