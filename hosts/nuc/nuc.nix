@@ -14,7 +14,6 @@
       ../../modules/lxqt.nix
 #       ../../modules/i3.nix
       ./disko.nix
-      ../../modules/tailscale.nix
     ];
 
     environment.systemPackages = with pkgs; [
@@ -68,6 +67,10 @@
   # services.xserver.enable = true;
 
 
+  # enable tailscale:
+  services.tailscale.enable = true;
+  services.tailscale.authKeyFile = config.sops.secrets.nucnix_tailscale_auth_key.path;
+  sops.secrets.nucnix_tailscale_auth_key={};
 
 
   # Configure keymap in X11
