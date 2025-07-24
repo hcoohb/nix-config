@@ -21,9 +21,11 @@ in
     openssh.authorizedKeys.keys =
     [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqVUomUD2uyYMGFa45vDTQCqe8v1Qm+39az7mseVSja hcooh@nucnix"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQBT4vB7oPLaot2M420iNeIgeJqHX4weW46twSlD2yf hcooh@NUC"
     ];
   };
 
+  #nix.settings.trusted-users = [ "hcooh" ]; # trust user to apply nix changes including unsigned imports from ssh
   ##################################################################################################################
   #
   # Home-Manager Configuration
@@ -50,6 +52,9 @@ in
       userEmail = "hcoohb@gmail.com";
     };
 
+    nix.extraOptions = ''
+    !include ${config.sops.templates.nix_access_tokens.path}
+    '';
 
 #     home.file = {
 #       test5.text = "${config.sops.secrets.new_val.key}";
@@ -79,7 +84,16 @@ in
         owner = config.users.users.${username}.name;
         inherit (config.users.users.${username}) group;
       };
+      github_token_read_secrets_repo={
+        owner = config.users.users.${username}.name;
+        inherit (config.users.users.${username}) group;
+      };
+
     };
+    sops.templates.nix_access_tokens.content = ''
+      extra-access-tokens = github.com=${config.sops.placeholder.github_token_read_secrets_repo}
+    '';
+    sops.templates.nix_access_tokens.owner = config.users.users.${username}.name;
 
 
 

@@ -24,8 +24,8 @@
     };
     # Add the private repo that contains all secrets:
     mysecrets = {
-#       url = "github:hcoohb/nix-secrets";
-      url = "git+ssh://git@github.com/hcoohb/nix-secrets.git?ref=main&shallow=1";
+      url = "github:hcoohb/nix-secrets";
+#       url = "git+ssh://git@github.com/hcoohb/nix-secrets.git?ref=main&shallow=1";
       flake = false;
     };
   };

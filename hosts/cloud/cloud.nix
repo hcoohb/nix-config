@@ -91,8 +91,9 @@
     LoginGracetime 2m
     MaxAuthTries 4
     '';
-
-
+# nix.settings.trusted-public-keys = [
+#   "hcooh-nucnix:AAAAC3NzaC1lZDI1NTE5AAAAIJQBT4vB7oPLaot2M420iNeIgeJqHX4weW46twSlD2yf"
+# ]:
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

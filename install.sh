@@ -41,9 +41,11 @@ echo "#####################################"
 read -n 1 -s -r -p "Press any key to continue..."
 # Install NixOS to the host system with our secrets
 # nixos-anywhere --extra-files "$temp" --flake '.#your-host' --target-host root@yourip
-nix run github:nix-community/nixos-anywhere -- --extra-files "$temp" --flake .#cloudnix --target-host nixos@150.107.75.153 --no-reboot
+nix run github:nix-community/nixos-anywhere -- --extra-files "$temp" --flake .#cloudnix --target-host nixos@150.107.75.153
 
 # the previous known_host key:
 ssh-keygen -R 150.107.75.153
 
-# now we can connect to the host to delete the ssh_host_ed25519_key
+# sudo nixos-rebuild dry-build --flake github:hcoohb/nix-config --show-trace
+
+
