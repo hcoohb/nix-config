@@ -73,4 +73,13 @@
   # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
   nix.settings.auto-optimise-store = true;
 
+
+    sops.templates.nix_access_tokens.content = ''
+      extra-access-tokens = github.com=${config.sops.placeholder.github_token_read_secrets_repo}
+    '';
+#     sops.templates.nix_access_tokens.owner = config.users.users.${username}.name;
+    nix.extraOptions = ''
+    !include ${config.sops.templates.nix_access_tokens.path}
+    '';
+
 }

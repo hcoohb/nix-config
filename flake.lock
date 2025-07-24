@@ -45,19 +45,17 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1753317010,
-        "narHash": "sha256-b9Tb6bTBwbnYG935K08/AapT72bp/FHlzBTf+kIRP4g=",
-        "ref": "main",
-        "rev": "38d673d07e46eb12f7fe981b30ea65feacead2a6",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/hcoohb/nix-secrets.git"
+        "lastModified": 1753333542,
+        "narHash": "sha256-u4Pv7Lnya/LVjT0YUo4iOazkFKMM/5hNxazGnZDgJJg=",
+        "owner": "hcoohb",
+        "repo": "nix-secrets",
+        "rev": "8549912dffb2e8ab3e46b2d1f2e13f47a6fcea1b",
+        "type": "github"
       },
       "original": {
-        "ref": "main",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/hcoohb/nix-secrets.git"
+        "owner": "hcoohb",
+        "repo": "nix-secrets",
+        "type": "github"
       }
     },
     "nixpkgs": {

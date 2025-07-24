@@ -53,7 +53,7 @@ in
     };
 
     nix.extraOptions = ''
-    !include ${config.sops.templates.nix_access_tokens.path}
+    !include ${config.sops.templates.nix_access_tokens_user.path}
     '';
 
 #     home.file = {
@@ -90,10 +90,10 @@ in
       };
 
     };
-    sops.templates.nix_access_tokens.content = ''
+    sops.templates.nix_access_tokens_user.content = ''
       extra-access-tokens = github.com=${config.sops.placeholder.github_token_read_secrets_repo}
     '';
-    sops.templates.nix_access_tokens.owner = config.users.users.${username}.name;
+    sops.templates.nix_access_tokens_user.owner = config.users.users.${username}.name;
 
 
 
