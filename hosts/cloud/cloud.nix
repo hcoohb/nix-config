@@ -41,29 +41,34 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+
   # enable tailscale
   services.tailscale = {
     enable = true;
     authKeyFile = config.sops.secrets.cloudnix_tailscale_auth_key.path;
     extraSetFlags = [ "--advertise-exit-node" ];
+    useRoutingFeatures = "server";
     };
   sops.secrets.cloudnix_tailscale_auth_key={};
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.openFirewall = false; # do not open firewall for non tailscale
   services.openssh.settings.PermitRootLogin = "no";
   services.openssh.extraConfig = ''
     LoginGracetime 2m
     MaxAuthTries 4
     '';
+
+
+  virtualisation.docker.enable = true;
+  # Configure Docker daemon to automatically prune in configuration.nix
+  virtualisation.docker.autoPrune.enable = true;
+  virtualisation.docker.autoPrune.dates = "daily";
+
 # nix.settings.trusted-public-keys = [
 #   "hcooh-nucnix:AAAAC3NzaC1lZDI1NTE5AAAAIJQBT4vB7oPLaot2M420iNeIgeJqHX4weW46twSlD2yf"
 # ]:
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
