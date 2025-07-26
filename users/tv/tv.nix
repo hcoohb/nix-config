@@ -32,18 +32,15 @@ in
       ../../home/home.nix
     ];
 
-
     xdg.configFile."pcmanfm-qt/lxqt/settings.conf".text = ''
       [Desktop]
       BgColor=#88397f
       font=monospace
     '';
     xdg.configFile = {
-#         "openbox/menu.xml".source = ./menu.xml;
-        "openbox/rc.xml".source = ./rc.xml;
+      #         "openbox/menu.xml".source = ./menu.xml;
+      "openbox/rc.xml".source = ./rc.xml;
     };
-
-
 
     # This value determines the home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -55,7 +52,5 @@ in
     # changes in each release.
     home.stateVersion = "25.05";
   };
-
-
 
 }

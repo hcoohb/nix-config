@@ -1,4 +1,9 @@
-{ inputs, config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 let
   secretspath = builtins.toString inputs.mysecrets;
 in
@@ -17,7 +22,7 @@ in
   sops = {
 
     defaultSopsFile = "${secretspath}/secrets.yaml";
-#     defaultSopsFile = "../../../secrets.yaml";
+    #     defaultSopsFile = "../../../secrets.yaml";
     validateSopsFiles = false;
 
     age = {
@@ -27,9 +32,9 @@ in
     };
 
     # secrets will be output in /run/secrets (accessible by root only unless specified)
-#     secrets = {
-#       new_val = { };
-# #       hello = {};
-#     };
+    #     secrets = {
+    #       new_val = { };
+    # #       hello = {};
+    #     };
   };
 }

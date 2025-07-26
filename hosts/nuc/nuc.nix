@@ -2,22 +2,26 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ../../users/hcooh/hcooh.nix # add each users
-      ../../users/tv/tv.nix # add each users
-      ./hardware-configuration.nix # Include the results of the hardware scan.
-      ../hosts.nix # common nixos to all hosts
-      ../../modules/lxqt.nix
-#       ../../modules/i3.nix
-      ./disko.nix
-    ];
+  imports = [
+    ../../users/hcooh/hcooh.nix # add each users
+    ../../users/tv/tv.nix # add each users
+    ./hardware-configuration.nix # Include the results of the hardware scan.
+    ../hosts.nix # common nixos to all hosts
+    ../../modules/lxqt.nix
+    #       ../../modules/i3.nix
+    ./disko.nix
+  ];
 
-    environment.systemPackages = with pkgs; [
-      featherpad
+  environment.systemPackages = with pkgs; [
+    featherpad
   ];
 
   #host specific settings for users:
@@ -27,9 +31,8 @@
       nixtttt = "sudo nixos-rebuild switch";
       latr = "${pkgs.coreutils}/bin/ls -latr";
     };
-#     xsession.windowManager.i3.enable = true;
+    #     xsession.windowManager.i3.enable = true;
   };
-
 
   # enable autologin for user:
   services.displayManager.autoLogin.enable = true;
@@ -66,12 +69,10 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
   # enable tailscale:
   services.tailscale.enable = true;
   services.tailscale.authKeyFile = config.sops.secrets.nucnix_tailscale_auth_key.path;
-  sops.secrets.nucnix_tailscale_auth_key={};
-
+  sops.secrets.nucnix_tailscale_auth_key = { };
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -90,7 +91,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
-
 
   # programs.firefox.enable = true;
 
@@ -139,4 +139,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-

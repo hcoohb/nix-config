@@ -1,0 +1,13 @@
+
+default_stages:
+  - pre-commit
+
+repos:
+  - repo: local
+    hooks:
+      - entry: nixfmt
+        files: \.nix
+        id: nixfmt
+        language: system
+        name: nixfmt
+

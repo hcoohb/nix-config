@@ -31,6 +31,9 @@
 
     # Utilities
     git
+    nixfmt-rfc-style
+    nixfmt-tree
+    pre-commit
     wget
     oh-my-zsh
     which

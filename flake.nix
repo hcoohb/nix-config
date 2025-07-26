@@ -25,45 +25,49 @@
     # Add the private repo that contains all secrets:
     mysecrets = {
       url = "github:hcoohb/nix-secrets";
-#       url = "git+ssh://git@github.com/hcoohb/nix-secrets.git?ref=main&shallow=1";
+      #       url = "git+ssh://git@github.com/hcoohb/nix-secrets.git?ref=main&shallow=1";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, disko, ... }@inputs:
-  let
-    shared-modules = [
-      # make home-manager as a module of nixos
-      # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-      }
-    ];
-    shared-specialArgs = { inherit inputs disko; };
-  in
-  {
-    nixosConfigurations =
+  outputs =
     {
-    nucnix =
-      nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = shared-modules ++ [ ./hosts/nuc/nuc.nix ];
-      specialArgs = shared-specialArgs;
-    };
-    cloudnix =
-      nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = shared-modules ++ [ ./hosts/cloud/cloud.nix ];
-      specialArgs = shared-specialArgs;
-    };
+      self,
+      nixpkgs,
+      home-manager,
+      disko,
+      ...
+    }@inputs:
+    let
+      shared-modules = [
+        # make home-manager as a module of nixos
+        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
+      shared-specialArgs = { inherit inputs disko; };
+    in
+    {
+      nixosConfigurations = {
+        nucnix = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = shared-modules ++ [ ./hosts/nuc/nuc.nix ];
+          specialArgs = shared-specialArgs;
+        };
+        cloudnix = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = shared-modules ++ [ ./hosts/cloud/cloud.nix ];
+          specialArgs = shared-specialArgs;
+        };
 
-    asus360 = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = shared-modules;
-    };
+        asus360 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = shared-modules;
+        };
 
+      };
     };
-  };
 }
