@@ -3,6 +3,7 @@
 
 #boot on nixos install or live
 # make sure we have the password for nixos user: `passwd`
+# Delete the tailscale machine if exists and create a new ts-auth key: Add device>linux server
 # launch this script
 
 # to remove a previousknown_host key:
@@ -45,6 +46,7 @@ nix run github:nix-community/nixos-anywhere -- --extra-files "$temp" --flake .#c
 
 # the previous known_host key:
 ssh-keygen -R 150.107.75.153
+ssh-keygen -R cloudnix
 
 # sudo nixos-rebuild dry-build --flake github:hcoohb/nix-config --show-trace
 

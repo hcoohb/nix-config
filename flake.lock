@@ -45,11 +45,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1753336687,
-        "narHash": "sha256-A1d67sspW4WGiZQnwKPnoAet0D98PfaVWAQ/UJCuydU=",
+        "lastModified": 1753423700,
+        "narHash": "sha256-aOIlYeb8IrME70TS9tVlF5+YSrBD6FYlTlR5lZ1k20M=",
         "owner": "hcoohb",
         "repo": "nix-secrets",
-        "rev": "b41cb89228f48080c51367c133054042e610ee24",
+        "rev": "5d95b8cab2841ff6533ac0a1ace884c30042e7bb",
         "type": "github"
       },
       "original": {

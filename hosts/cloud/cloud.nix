@@ -2,22 +2,25 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ../../users/hcooh/hcooh.nix # add each users
-      ./hardware-configuration.nix # Include the results of the hardware scan.
-      ../hosts.nix # common nixos to all hosts
-      ./disko.nix
-    ];
-
-    environment.systemPackages = with pkgs; [
-
+  imports = [
+    ../../users/hcooh/hcooh.nix # add each users
+    ./hardware-configuration.nix # Include the results of the hardware scan.
+    ../hosts.nix # common nixos to all hosts
+    ./disko.nix
+    ./traefik.nix
   ];
 
+  environment.systemPackages = with pkgs; [
 
+  ];
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -32,7 +35,6 @@
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
 
-
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -41,15 +43,14 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-
   # enable tailscale
   services.tailscale = {
     enable = true;
     authKeyFile = config.sops.secrets.cloudnix_tailscale_auth_key.path;
     extraSetFlags = [ "--advertise-exit-node" ];
     useRoutingFeatures = "server";
-    };
-  sops.secrets.cloudnix_tailscale_auth_key={};
+  };
+  sops.secrets.cloudnix_tailscale_auth_key = { };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -58,17 +59,16 @@
   services.openssh.extraConfig = ''
     LoginGracetime 2m
     MaxAuthTries 4
-    '';
-
+  '';
 
   virtualisation.docker.enable = true;
   # Configure Docker daemon to automatically prune in configuration.nix
   virtualisation.docker.autoPrune.enable = true;
   virtualisation.docker.autoPrune.dates = "daily";
 
-# nix.settings.trusted-public-keys = [
-#   "hcooh-nucnix:AAAAC3NzaC1lZDI1NTE5AAAAIJQBT4vB7oPLaot2M420iNeIgeJqHX4weW46twSlD2yf"
-# ]:
+  # nix.settings.trusted-public-keys = [
+  #   "hcooh-nucnix:AAAAC3NzaC1lZDI1NTE5AAAAIJQBT4vB7oPLaot2M420iNeIgeJqHX4weW46twSlD2yf"
+  # ]:
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -95,4 +95,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
