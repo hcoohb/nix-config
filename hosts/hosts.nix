@@ -41,13 +41,18 @@
     unzip
     xz
     p7zip
+    yazi
+    nano
     nix-tree
 
     # Fonts
     powerline-fonts
 
   ];
-
+  environment.variables.EDITOR = "nano";
+  environment.sessionVariables = {
+    EDITOR = "nano";
+  };
   programs.zsh = {
     enable = true;
     ohMyZsh.enable = true;
@@ -62,6 +67,11 @@
     };
     histSize = 5000;
   };
+  programs.nano.nanorc = ''
+    set tabstospaces
+    set tabsize 2
+  '';
+
   users.defaultUserShell = pkgs.zsh; # set as default shell
 
   # Perform garbage collection weekly to maintain low disk usage

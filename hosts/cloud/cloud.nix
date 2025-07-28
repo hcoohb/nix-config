@@ -6,6 +6,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -15,11 +16,11 @@
     ./hardware-configuration.nix # Include the results of the hardware scan.
     ../hosts.nix # common nixos to all hosts
     ./disko.nix
-    ./traefik.nix
+    "${inputs.mysecrets}/cloud/traefik/traefik.nix" # import traefik config from secrets for privacy
   ];
 
   environment.systemPackages = with pkgs; [
-
+    glances
   ];
 
   # Use the GRUB 2 boot loader.
@@ -52,6 +53,11 @@
   };
   sops.secrets.cloudnix_tailscale_auth_key = { };
 
+  services.glances = {
+    enable = true;
+    extraArgs = [ "--webserver" ];
+  };
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.openFirewall = false; # do not open firewall for non tailscale
@@ -60,11 +66,12 @@
     LoginGracetime 2m
     MaxAuthTries 4
   '';
-
-  virtualisation.docker.enable = true;
-  # Configure Docker daemon to automatically prune in configuration.nix
-  virtualisation.docker.autoPrune.enable = true;
-  virtualisation.docker.autoPrune.dates = "daily";
+  /*
+    virtualisation.docker.enable = true;
+    # Configure Docker daemon to automatically prune in configuration.nix
+    virtualisation.docker.autoPrune.enable = true;
+    virtualisation.docker.autoPrune.dates = "daily";
+  */
 
   # nix.settings.trusted-public-keys = [
   #   "hcooh-nucnix:AAAAC3NzaC1lZDI1NTE5AAAAIJQBT4vB7oPLaot2M420iNeIgeJqHX4weW46twSlD2yf"

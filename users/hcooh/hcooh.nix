@@ -40,7 +40,6 @@ in
     # Packages that should be installed to the user profile.
     home.packages = with pkgs; [
       tree
-      tigervnc
     ];
 
     # basic configuration of git
@@ -48,6 +47,12 @@ in
       enable = true;
       userName = "hcoohb";
       userEmail = "hcoohb@gmail.com";
+    };
+
+    #initialise a zsh shell
+    programs.zsh.enable = true; # still need to enable for options to apply, even if nixos config has it defined already at system level
+    programs.zsh.shellAliases = {
+      latr = "${pkgs.coreutils}/bin/ls -latr";
     };
 
     nix.extraOptions = ''
