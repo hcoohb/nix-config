@@ -55,7 +55,10 @@
 
   services.glances = {
     enable = true;
-    extraArgs = [ "--webserver" ];
+    extraArgs = [
+      "--webserver"
+      "--disable-history"
+    ];
   };
 
   # Enable the OpenSSH daemon.
