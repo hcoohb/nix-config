@@ -57,7 +57,7 @@
           modules = shared-modules ++ [ ./hosts/nuc/nuc.nix ];
           specialArgs = shared-specialArgs;
         };
-        cloudnix = nixpkgs.lib.nixosSystem {
+        cloud = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = shared-modules ++ [ ./hosts/cloud/cloud.nix ];
           specialArgs = shared-specialArgs;

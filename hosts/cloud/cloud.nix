@@ -31,7 +31,7 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.efiInstallAsRemovable = true;
 
-  networking.hostName = "cloudnix"; # Define your hostname.
+  networking.hostName = "cloud"; # Define your hostname.
 
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
