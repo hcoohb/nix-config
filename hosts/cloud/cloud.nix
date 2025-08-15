@@ -47,7 +47,7 @@
   # enable tailscale
   services.tailscale = {
     enable = true;
-    authKeyFile = config.sops.secrets.cloudnix_tailscale_auth_key.path;
+    authKeyFile = config.sops.secrets.cloud_tailscale_auth_key.path;
     extraSetFlags = [ "--advertise-exit-node" ];
     useRoutingFeatures = "server";
   };
