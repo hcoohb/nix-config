@@ -51,7 +51,7 @@
     extraSetFlags = [ "--advertise-exit-node" ];
     useRoutingFeatures = "server";
   };
-  sops.secrets.cloudnix_tailscale_auth_key = { };
+  sops.secrets.cloud_tailscale_auth_key = { };
 
   services.glances = {
     enable = true;
