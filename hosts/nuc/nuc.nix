@@ -15,14 +15,47 @@
     ../../users/tv/tv.nix # add each users
     ./hardware-configuration.nix # Include the results of the hardware scan.
     ../hosts.nix # common nixos to all hosts
-    ../../modules/lxqt.nix
+    #     ../../modules/lxqt.nix
     #       ../../modules/i3.nix
     ./disko.nix
   ];
 
   environment.systemPackages = with pkgs; [
     featherpad
+    alacritty
+    xfce.thunar
+    waybar
+    fuzzel
+    #     xdg-desktop-portal-wlr
+    #     xdg-desktop-portal-gtk
+    #     xdg-desktop-portal-gnome
+    kdePackages.polkit-kde-agent-1
+    mako
+    xdg-utils
   ];
+
+  programs.niri.enable = true;
+  xdg.autostart.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+  xdg.portal.configPackages = [ pkgs.niri ];
+  services.displayManager.sessionPackages = [ pkgs.niri ];
+  hardware.graphics.enable = true;
+  security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  systemd.user.services.niri-flake-polkit = {
+    description = "PolicyKit Authentication Agent provided by niri-flake";
+    wantedBy = [ "niri.service" ];
+    after = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
 
   #host specific settings for users:
   home-manager.users.tv = {
@@ -32,11 +65,25 @@
       latr = "${pkgs.coreutils}/bin/ls -latr";
     };
     #     xsession.windowManager.i3.enable = true;
+
+    #     wayland.windowManager.sway.enable = true ;
+    #     wayland.windowManager.sway.config.modifier = "Control";
+    #     wayland.windowManager.sway.config.output = {
+    #       "*" = {
+    #         bg = "#444444 solid_color";
+    #       };
+    #     };
   };
 
   # enable autologin for user:
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "tv";
+  #   services.displayManager.autoLogin.enable = true;
+  #   services.displayManager.autoLogin.user = "tv";
+
+  #   # enable Sway window manager
+  #   programs.sway = {
+  #     enable = true;
+  # #     wrapperFeatures.gtk = true;
+  #   };
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
