@@ -44,6 +44,8 @@
     yazi
     nano
     nix-tree
+    nh
+    sshfs
 
     # Fonts
     powerline-fonts

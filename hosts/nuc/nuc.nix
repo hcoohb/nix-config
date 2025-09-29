@@ -32,6 +32,7 @@
     kdePackages.polkit-kde-agent-1
     mako
     xdg-utils
+    wlogout
   ];
 
   programs.niri.enable = true;
